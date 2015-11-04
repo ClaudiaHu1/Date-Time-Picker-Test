@@ -1,0 +1,114 @@
+<link rel="import" href="../polymer/polymer.html"/>
+
+<script src="../moment/moment.js"></script>
+
+<!--
+Element that renders a calendar cell for a given date (and for non-date cells in the calendar).
+
+##### Usage
+
+    <px-calendar-cell display-date="{{...}}"
+                      selected-date="{{...}}">
+    </px-calendar-cell>
+
+-->
+<dom-module id="px-calendar-cell">
+  <link rel="import" type="css" href="css/px-calendar.css"/>
+  <template>
+    <div class$="{{cellStyles}}">
+      <button class$="{{btnStyles}}" value="{{day}}" on-click="_selectDate" disabled="{{isDisabled}}" hidden$="{{!isValidDate}}">{{day}}</button>
+    </div>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+
+    is: 'px-calendar-cell',
+
+    properties: {
+
+      /**
+       * Moment object with date to display in this cell
+       */
+      displayDate: Object,
+
+      /**
+       * Moment object with selected date
+       */
+//      selectedDate: Object,
+      selectedDate: {
+        type: Object,
+        notify: true
+      },
+
+      /**
+       * (optional)
+       *
+       * Set this attribute when you do want to allow future dates in the date range picker.
+       *
+       * If not set, then future dates will be disabled and unclickable in the date picker.
+       *
+       * Note: this only affects the visual calendar date picker, users can always type in dates/times or choose times that are in the future.
+       */
+
+      allowFutureDates: {
+        type: Boolean,
+        value: false
+      }
+
+    },
+
+    observers: [
+      '_updateDate(displayDate)'
+    ],
+
+    _updateDate: function() {
+
+      var cellStyles = 'calendar-cell';
+      var btnStyles = 'btn btn--bare';
+      var isDisabled = false;
+
+      this.set('isValidDate', this.displayDate.isValid());
+
+      if (!this.isValidDate) {
+        // if the cell is a blank cell of calendar (before/after start of month)
+        cellStyles += ' is-empty';
+        this.set('day', '');
+      }
+      else {
+        this.set('day', this.displayDate.format('D'));
+
+        if (this._isTodaysDate()) {
+          cellStyles += ' is-today';
+        }
+
+        if (this._isSelectedDate()) {
+          cellStyles += ' is-selected';
+        }
+
+      }
+
+      this.set('btnStyles', btnStyles);
+      this.set('isDisabled', isDisabled);
+      this.set('cellStyles', cellStyles);
+
+    },
+
+    _selectDate: function(e) {
+      var day = moment(this.displayDate);
+      this.selectedDate = day;
+      this.fire('px-date-selected', this.day);
+    },
+
+    _isTodaysDate: function() {
+      var todaysDate = moment();
+      return this.displayDate.isSame(todaysDate, 'day');
+    },
+
+    _isSelectedDate: function() {
+      return this.displayDate.isSame(this.selectedDate, 'day');
+    }
+
+  });
+</script>

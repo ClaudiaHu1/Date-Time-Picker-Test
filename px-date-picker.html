@@ -1,0 +1,116 @@
+<link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="px-calendar.html"/>
+
+<script src="../moment/moment.js"></script>
+
+<!--
+Date Time picker element which allows user to select date.
+
+##### Usage
+
+    <px-date-picker selected-date-picker="{{...}}">
+    </px-date-picker>
+
+-->
+<dom-module id="px-date-picker">
+  <link rel="import" type="css" href="css/px-date-rangepicker.css"/>
+  <template>
+    <div id=box class="flex flex--top flex--center flex--wrap">
+      <div class="flex flex--top u-mh+ u-mb+">
+        <button on-click="_jumpBack" class="btn btn--bare u--mr-">
+          <i class="fa fa-angle-left"></i>
+        </button>
+        <px-calendar
+          id="leftCalendar"
+          display-month-year="{{pickerDisplayMonthYear}}"
+          selected-date="{{selectedDate}}"
+          allow-future-dates="{{allowFutureDates}}">
+        </px-calendar>
+        <button id=btnNextMonth on-click="_jumpForward" class="btn btn--bare u--ml-">
+          <i class="fa fa-angle-right"></i>
+        </button>
+      </div>
+    </div>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+
+    is: 'px-date-picker',
+
+    properties: {
+
+      /**
+       * Moment object with selected date
+       */
+      selectedDatePicker: {
+        type: Object,
+        notify: true
+      },
+
+      /**
+       * (optional)
+       *
+       * Set this attribute when you do want to allow future dates in the date range picker.
+       *
+       * If not set, then future dates will be disabled and unclickable in the date picker.
+       *
+       * Note: this only affects the visual calendar date picker, users can always type in dates/times or choose times that are in the future.
+       */
+      allowFutureDates: {
+        type: Boolean,
+        value: false
+      }
+
+    },
+
+    observers: [
+      '_updateSelectedRange(selectedDatePicker)'
+    ],
+
+    _updateSelectedRange: function() {
+      // initialize the selected dates to the dates
+      this._resetVisibleCalendars();
+    },
+
+    _resetVisibleCalendars: function() {
+      // initialize the displayed months to the selected selectedDatePicker
+      this.set('pickerDisplayMonthYear', moment(this.selectedDatePicker).startOf('month'));
+      this._setJumpButtonStyles();
+    },
+
+    ready: function() {
+      var self = this;
+      this.$.box.addEventListener('date-selected', function() {
+        var selectedDatePicker = self.selectedDate;
+
+        // set the times back to what they really should be
+        selectedDatePicker.hour(self.selectedDatePicker.hour());
+        selectedDatePicker.minute(self.selectedDatePicker.minute());
+        selectedDatePicker.second(self.selectedDatePicker.second());
+
+        self.set('selectedDatePicker', selectedDatePicker);
+      });
+
+    },
+
+    _jumpBack: function() {
+      this.set('pickerDisplayMonthYear', moment(this.pickerDisplayMonthYear.add(-1, 'months')));
+      this._setJumpButtonStyles();
+    },
+
+    _jumpForward: function() {
+      this.set('pickerDisplayMonthYear', moment(this.pickerDisplayMonthYear.add(1, 'months')));
+      this._setJumpButtonStyles();
+    },
+
+    _setJumpButtonStyles: function() {
+      if (this.allowFutureDates) {
+        this.toggleAttribute('disabled', false, this.$.btnNextMonth);
+        this.toggleClass('btn--disabled', false, this.$.btnNextMonth);
+      }
+    }
+
+  });
+</script>

@@ -1,0 +1,43 @@
+<link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="px-time-input.html"/>
+
+<script src="../moment/moment.js"></script>
+
+<!--
+Time rangepicker element which allows user to select a start and end time.
+
+##### Usage
+
+    <px-time-picker selected-time="{{selectedTime}}">
+    </px-time-picker>
+
+-->
+<dom-module id="px-time-picker">
+  <link rel="import" type="css" href="css/px-time-rangepicker.css"/>
+  <template>
+    <div class="flex flex--center flex--middle">
+      <px-time-input id="fromTime" time="{{selectedTime}}" class="flex"></px-time-input>
+    </div>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+
+    is: 'px-time-picker',
+
+    properties: {
+
+
+      /**
+       * Moment object with time for time picker
+       */
+      selectedTime: {
+        type: Object,
+        notify: true
+      }
+
+    }
+
+  });
+</script>

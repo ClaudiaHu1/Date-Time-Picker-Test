@@ -1,0 +1,127 @@
+<link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="px-time-picker.html"/>
+<link rel="import" href="px-date-picker.html"/>
+
+<script src="../moment/moment.js"></script>
+
+<!--
+DateTimepicker modal component.
+
+##### Usage
+
+    <px-datetimepicker-modal selected={{...}}>
+    </px-datetimepicker-modal>
+-->
+<dom-module id="px-datetimepicker-modal">
+  <link rel="import" type="css" href="css/px-rangepicker.css"/>
+  <template>
+    <div class=overlay></div>
+    <div id="rangepickerModal" class="rangepicker__box">
+      <div class="flex flex--wrap">
+        <div>
+          <px-date-picker
+            id="dateRangePicker"
+            class="u-pt+"
+            selected-date-picker="{{selected}}"
+            allow-future-dates="{{allowFutureDates}}">
+          </px-date-picker>
+          <px-time-picker
+            class="border--top u-p+"
+            id="timeRangePicker"
+            selected-time="{{selected}}">
+          </px-time-picker>
+        </div>
+      </div>
+      <div class="flex flex--right border--top u-p-">
+        <button class="btn btn--primary" type=submit on-click="_submit">
+          <i class$="{{displayOptions.submitButtonIcon}}"></i>
+          <span>{{displayOptions.submitButtonText}}</span>
+        </button>
+        <button class=btn on-click="_closeAndReturnFocus">Close</button>
+      </div>
+    </div>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+
+    is: 'px-datetimepicker-modal',
+
+    properties: {
+
+      /**
+       * Moment object start date & time for range picker
+       */
+      selected: {
+        type: Object,
+        notify: true
+      },
+
+      /**
+       * (optional)
+       *
+       * Set this attribute when you do want to allow future dates in the date range picker.
+       *
+       * If not set, then future dates will be disabled and unclickable in the date picker.
+       *
+       * Note: this only affects the visual calendar date picker, users can always type in dates/times or choose times that are in the future.
+       */
+      allowFutureDates: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Display options
+       */
+      displayOptions: {
+        type: Object,
+        notify:true,
+        value: {
+          displayType: 'normal',
+          submitButtonText: 'Submit',
+          submitButtonIcon: ''
+        }
+      },
+
+      /**
+       * True if the modal is hidden.  Must be declared as a property to reference (below) in IE 10.
+       * @private
+       */
+      hidden: Boolean
+
+    },
+
+    /**
+     * Open the modal
+     */
+    open: function() {
+      if(this._isClosed()) {
+        this.$.dateRangePicker._resetVisibleCalendars();
+        this.toggleAttribute('hidden', false);
+      }
+    },
+
+    /**
+     * Close the modal
+     */
+    close: function() {
+      this.toggleAttribute('hidden', true);
+    },
+
+    _closeAndReturnFocus: function() {
+      this.close();
+      this.fire('px-modal-close-clicked');
+    },
+
+    _isClosed: function() {
+      return this.hidden;
+    },
+
+    _submit: function () {
+      this.fire('px-submit-range');
+    }
+
+  });
+</script>

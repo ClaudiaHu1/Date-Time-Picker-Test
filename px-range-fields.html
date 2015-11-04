@@ -1,0 +1,101 @@
+<link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="px-range-field.html"/>
+
+<script src="../moment/moment.js"></script>
+
+<!--
+Component with all the date/time fields which are displayed in the range picker.
+
+##### Usage
+
+    <px-range-fields from={{...}}>
+    </px-range-fields>
+-->
+<dom-module id="px-range-fields">
+  <link rel="import" type="css" href="css/px-range-fields.css"/>
+  <template>
+    <div class="form flex flex--middle flex--wrap">
+      <div id="fromFields" class="flex flex--middle text-input u-mb-">
+        <span class=a11y>From</span>
+        <px-range-field
+          id="fromDate"
+          moment="{{fromWorkingCopy}}"
+          date-or-time="Date"
+          class="flex u-mr-">
+        </px-range-field>
+        <px-range-field
+          id="fromTime"
+          moment="{{fromWorkingCopy}}"
+          date-or-time="Time"
+          class="flex">
+        </px-range-field>
+      </div>
+    </div>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+
+    is: 'px-range-fields',
+
+    properties: {
+
+      /**
+       * Moment object start date & time
+       */
+      from: {
+        type: Object,
+        notify: true,
+        observer: '_updateFromWorkingCopy'
+      },
+
+    },
+
+    observers: [
+      '_validateRangeAndBroadcastChanges(fromWorkingCopy)'
+    ],
+
+    _updateFromWorkingCopy: function() {
+      this.set('fromWorkingCopy', moment(this.from));
+
+    },
+
+    _validateRangeAndBroadcastChanges: function() {
+
+      if(!this.fromWorkingCopy.isSame(this.from, 'second')) {
+        this.set('from', this.fromWorkingCopy);
+      }
+
+    },
+
+
+    ready: function() {
+      var self = this;
+      this.$.fromDate.addEventListener('px-focused-range-field', function(e) {
+        self.lastFocusedElement = self.$.fromDate;
+        self._toggleFocusToFrom(true);
+      });
+
+      this.$.fromTime.addEventListener('px-focused-range-field', function(e) {
+        self.lastFocusedElement = self.$.fromTime;
+        self._toggleFocusToFrom(true);
+      });
+
+    },
+
+    /**
+     * Return focus to the range field which was last focused on.
+     */
+    returnLastFocus: function() {
+      this.lastFocusedElement.focus();
+    },
+
+    _toggleFocusToFrom: function(isFromFocused) {
+      this.toggleClass('is-focused', isFromFocused, this.$$('#fromFields'));
+    },
+
+
+
+  });
+</script>

@@ -1,0 +1,54 @@
+<!doctype html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>px-rangepicker Demo</title>
+  <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
+  <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+  <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
+  <link rel="import" href="../px-theme/px-theme.html"/>
+  <!--<link rel="import" href="px-rangepicker.html"/>-->
+  <link rel="import" href="px-date-time-picker.html"/>
+
+
+  <link rel="import" href="../iron-ajax/iron-ajax.html"/>
+
+  <style>
+    html {
+      font-size: 0.9375rem;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <h3>Demo</h3>
+
+  <!-- Wrap elements with auto-binding template to -->
+  <!-- allow use of Polymer bindings in main document -->
+  <template id="just-for-demo" is="dom-bind">
+
+    <iron-ajax
+      auto
+      url="demo-data/sample-data.json"
+      last-response="{{sampleData}}"
+      handle-as="json"></iron-ajax>
+
+    <div>
+      The Time selected <b>{{sampleData.selectedDateTime}}</b>
+    </div>
+
+      <div style="position: relative;">
+        <px-rangepicker selected-date-Time="{{sampleData.selectedDateTime}}"
+                        allow-future-dates>
+        </px-rangepicker>
+      </div>
+
+
+  </template>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+<link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="px-range-fields.html"/>
+<link rel="import" href="px-datetimepicker-modal.html"/>
+
+<script src="../moment/moment.js"></script>
+
+<!--
+Rangepicker with time element.
+
+##### Usage
+
+    <px-date-time-picker selectedDateTime="{{...}}">
+    </px-date-time-picker>
+
+@demo demo.html
+-->
+<dom-module id="px-date-time-picker">
+  <link rel="import" type="css" href="css/px-rangepicker.css"/>
+  <template>
+    <px-datetimepicker-modal
+      id=rangePickerModal
+      selected="{{fromMoment}}"
+      allow-future-dates="{{allowFutureDates}}"
+      display-options="{{displayOptions}}"
+      hidden>
+    </px-datetimepicker-modal>
+    <px-range-fields
+      id="rangeFields"
+      from="{{fromMoment}}">
+    </px-range-fields>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+
+    is: 'px-date-time-picker',
+
+    properties: {
+
+      /**
+       * Range selected in the date time picker - as ISO8601 strings
+       *
+       * Format
+       * ```
+       * {
+       *    "selectedDateTime": "2013-01-07T22:44:30.652Z"
+       *
+       * }
+       * ```
+       *
+       * This is a 2-way data-bindable object which will be changed when the user Submits their new selected date.
+       *
+       * @default the last week
+       */
+      selectedDateTime: {
+        type: Object,
+        notify: true,
+        reflectToAttribute: true, // need both notify & reflectToAttribute for bind-polymer to work
+        observer: '_setDate',
+        value: function() {
+          return {
+            from: moment().subtract(7, 'day').toISOString()
+          };
+        }
+      },
+      /**
+       * (optional)
+       *
+       * Set this attribute when you do want to allow future dates in the date range picker.
+       *
+       * If not set, then future dates will be disabled and unclickable in the date picker.
+       *
+       * Note: this only affects the visual calendar date picker, users can always type in dates/times or choose times that are in the future.
+       */
+      allowFutureDates: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * (optional)
+       *
+       * Display configuration that allows optional display patterns
+       *
+       *```
+       * ```
+       *
+       * @default no presets
+       */
+      displayOptions: {
+        type: Object,
+        value: {
+          displayType: 'normal',
+          submitButtonText: 'Submit',
+          submitButtonIcon: ''
+        }
+      }
+
+    },
+
+    observers: [
+      '_updateWorkingCopies(fromMoment)',
+      '_updateMoments(fromWorkingCopy)'
+    ],
+
+    _setDate: function() {
+      this.set('fromWorkingCopy', this.selectedDateTime);
+    },
+
+    _updateWorkingCopies: function() {
+      this.set('fromWorkingCopy', this.fromMoment.toISOString());
+    },
+
+    _updateMoments: function() {
+      this._updateMomentIfDifferent(this.fromWorkingCopy, 'fromMoment');
+    },
+
+    _updateMomentIfDifferent: function(newTimeString, currentMomentName) {
+      var newMoment = moment(newTimeString, moment.ISO_8601);
+      if (!this[currentMomentName] || !this[currentMomentName].isSame(newMoment, 'second')) { // break unnecessary looping
+        this.set(currentMomentName, newMoment);
+      }
+    },
+
+    ready: function() {
+
+      var self = this;
+
+      this.$.rangeFields.addEventListener('px-clicked-range-field', function(e) {
+        self.$.rangePickerModal.open();
+      });
+
+      this.$.rangePickerModal.addEventListener('px-submit-range', function(e) {
+        // grab the data from the field and submit to the heaven
+        self.set('selectedDateTime', self.fromWorkingCopy);
+        self.$.rangePickerModal.close();
+
+      });
+
+      this.$.rangePickerModal.addEventListener('px-modal-close-clicked', function(e) {
+        // return focus to range fields when the close button is clicked (probably not with submit)
+        self.$.rangeFields.returnLastFocus();
+      });
+    }
+
+  });
+</script>
