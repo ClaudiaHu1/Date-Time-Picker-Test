@@ -105,11 +105,30 @@ Date Time picker element which allows user to select date.
       this._setJumpButtonStyles();
     },
 
+//    _setJumpButtonStyles: function() {
+//      if (this.allowFutureDates) {
+//        this.toggleAttribute('disabled', false, this.$.btnNextMonth);
+//        this.toggleClass('btn--disabled', false, this.$.btnNextMonth);
+//      }
+//    }
+
     _setJumpButtonStyles: function() {
-      if (this.allowFutureDates) {
-        this.toggleAttribute('disabled', false, this.$.btnNextMonth);
-        this.toggleClass('btn--disabled', false, this.$.btnNextMonth);
+      if (!this.allowFutureDates) {
+        // if we don't allow future dates, we want to disable the jump right button
+        if (this._isCurrentMonth()) {
+          this.toggleAttribute('disabled', true, this.$.btnNextMonth);
+          this.toggleClass('btn--disabled', true, this.$.btnNextMonth);
+        }
+        else {
+          this.toggleAttribute('disabled', false, this.$.btnNextMonth);
+          this.toggleClass('btn--disabled', false, this.$.btnNextMonth);
+        }
       }
+    },
+
+    _isCurrentMonth: function() {
+      var now = moment();
+      return this.pickerDisplayMonthYear.isSame(now, 'month');
     }
 
   });
