@@ -1,13 +1,13 @@
 {
-  "name": "px-rangepicker",
+  "name": "px-date-time-picker",
   "author": "General Electric",
-  "description": "rangepicker",
-  "version": "0.0.19",
+  "description": "date time picker",
+  "version": "0.0.1",
   "private": true,
   "extName": null,
   "repository": {
     "type": "git",
-    "url": "https://github.com/PredixDev/px-rangepicker.git"
+    "url": "https://github.com/ClaudiaHu1/date-time-picker-test"
   },
   "homepage": "http://predix.io/",
   "devDependencies": {
