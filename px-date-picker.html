@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="px-calendar.html"/>
+<link rel="import" href="px-datetime-calendar.html"/>
 
 <script src="../moment/moment.js"></script>
 
@@ -20,12 +20,12 @@ Date Time picker element which allows user to select date.
         <button on-click="_jumpBack" class="btn btn--bare u--mr-">
           <i class="fa fa-angle-left"></i>
         </button>
-        <px-calendar
+        <px-datetime-calendar
           id="leftCalendar"
           display-month-year="{{pickerDisplayMonthYear}}"
           selected-date="{{selectedDate}}"
           allow-future-dates="{{allowFutureDates}}">
-        </px-calendar>
+        </px-datetime-calendar>
         <button id=btnNextMonth on-click="_jumpForward" class="btn btn--bare u--ml-">
           <i class="fa fa-angle-right"></i>
         </button>
