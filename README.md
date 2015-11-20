@@ -1,6 +1,6 @@
 # apm-date-time-picker
 
-Px-Rangepicker enables setting a range of time using a calendar-based UI.
+apm-date-time-picker enables setting a range of time using a calendar-based UI.
 
 ## Overview
 
@@ -34,7 +34,7 @@ Second, import the component to your application with the following tag in your 
 Finally, use the component in your application:
 
 ```html
-<px-rangepicker></px-rangepicker>
+<apm-date-time-picker></apm-date-time-picker>
 ```
 
 <br />
@@ -65,10 +65,10 @@ The `range` attribute is 2-way data-bindable object with two properties: "from" 
 By default future dates are disabled in the date picker. Set the `allow-future-dates` attribute to "true" to enable future dates in the date range picker. *Note: No validation of dates is performed so users are able to enter manually any date without restriction. This attribute merely disables choosing future dates via the calendar UI.*
 
 ```html
-<px-rangepicker
+<apm-date-time-picker
 	...
 	allow-future-dates="true">
-</px-rangepicker>
+</apm-date-time-picker>
 ```
 
 #### preset-ranges
@@ -82,7 +82,7 @@ The `displayText` attribute assigns a label to the preset link which will appear
 The `startDateTime` and `endDateTime` attributes set the beginning and end of the range, defined as [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date-time strings.
 
 ```html
-<px-rangepicker
+<apm-date-time-picker
 	...
 	preset-ranges='[
       {
@@ -96,7 +96,7 @@ The `startDateTime` and `endDateTime` attributes set the beginning and end of th
         "endDateTime": "2015-05-12T12:47:07Z"
       }
     ]'>
-</px-rangepicker>
+</apm-date-time-picker>
 ```
 
 #### display-options
@@ -106,14 +106,14 @@ The `startDateTime` and `endDateTime` attributes set the beginning and end of th
 Display configuration that enables customization of the `displayType`, `submitButtonText`, and `submitButtonIcon`.
 
 ```html
-<px-rangepicker
+<apm-date-time-picker
 	...
 	display-options="{
         "displayType": "normal",
         "submitButtonText": "Submit",
         "submitButtonIcon": ""
     }">
-</px-rangepicker>
+</apm-date-time-picker>
 ```
 
 <br />
@@ -127,7 +127,7 @@ Event fired on change to `range` value. Listeners will receive an event object w
 Add a listener using the `on-range-changed` annotated event listener syntax as follows:
 
 ```html
-<px-rangepicker on-range-changed="rangeChangedHandler"></px-rangepicker>
+<apm-date-time-picker on-range-changed="rangeChangedHandler"></apm-date-time-picker>
 ```
 ```javascript
 var rangeChangedHandler = function(e) {
@@ -138,7 +138,7 @@ var rangeChangedHandler = function(e) {
 Attach an event listener using `addEventListener` like this:
 
 ```html
-<px-rangepicker id="my-range-picker"></px-rangepicker>
+<apm-date-time-picker id="my-range-picker"></apm-date-time-picker>
 ```
 ```javascript
 	var el = document.querySelector("#my-range-picker");
