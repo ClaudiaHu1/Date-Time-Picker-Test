@@ -1,4 +1,4 @@
-# Px-Rangepicker
+# apm-date-time-picker
 
 Px-Rangepicker enables setting a range of time using a calendar-based UI.
 
@@ -49,13 +49,13 @@ Finally, use the component in your application:
 The `range` attribute is 2-way data-bindable object with two properties: "from" and "to". The value of these must be set to valid [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date-time strings.
 
 ```html
-<px-rangepicker
+<apm-date-time-picker
 	...
 	range='{
       "from": "2015-08-18T00:14:42.387Z",
       "to": "2015-09-02T05:06:00.387Z"
     }'>
-</px-rangepicker>
+</apm-date-time-picker>
 ```
 
 #### allow-future-dates
