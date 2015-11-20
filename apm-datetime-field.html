@@ -5,11 +5,11 @@ Range field component which displays a time or date and font awesome icon.
 
 ##### Usage
 
-    <px-range-field moment="{{...}}" date-or-time="Date">
-    </px-range-field>
+    <apm-datetime-field moment="{{...}}" date-or-time="Date">
+    </apm-range-field>
 
 -->
-<dom-module id="px-range-field">
+<dom-module id="apm-datetime-field">
   <link rel="import" type="css" href="css/px-range-fields.css"/>
   <template>
     <div class="range-field__field flex flex--middle">
@@ -26,7 +26,7 @@ Range field component which displays a time or date and font awesome icon.
 <script>
   Polymer({
 
-    is: 'px-date-time-field',
+    is: 'apm-datetime-field',
 
     properties: {
 
@@ -122,7 +122,7 @@ Range field component which displays a time or date and font awesome icon.
     },
 
     /**
-     * Focus on the input in this date time field
+     * Focus on the input in this range field
      */
     focus: function() {
       this.querySelector('input').focus();

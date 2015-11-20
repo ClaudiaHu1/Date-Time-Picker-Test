@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="px-datetime-calendar-cell.html"/>
+<link rel="import" href="apm-calendar-cell.html"/>
 
 <script src="../moment/moment.js"></script>
 
@@ -10,12 +10,12 @@ The first range date may be before, after, or equal to the second range date, de
 
 ##### Usage
 
-    <px-datetime-calendar display-month-year="{{...}}"
+    <apm-calendar display-month-year="{{...}}"
                  selected-date="{{...}}">
-    </px-datetime-calendar>
+    </apm-calendar>
 
 -->
-<dom-module id="px-calendar">
+<dom-module id="apm-calendar">
   <link rel="import" type="css" href="css/px-calendar.css"/>
   <template>
     <div class="table table--no-cells text--center" id="calendar">
@@ -31,12 +31,12 @@ The first range date may be before, after, or equal to the second range date, de
       <template is="dom-repeat" items="{{calendar}}" as="week">
         <div class="tr">
           <template is="dom-repeat" items="{{week}}" as="date">
-            <div class="td">
-              <px-datetime-calendar-cell display-date="{{date}}"
-                                         selected-date="{{selectedDate}}"
-                                         allow-future-dates="{{allowFutureDates}}">
-              </px-datetime-calendar-cell>
-            </div>
+              <div class="td">
+                <apm-calendar-cell display-date="{{date}}"
+                                  selected-date="{{selectedDate}}"
+                                  allow-future-dates="{{allowFutureDates}}">
+                </apm-calendar-cell>
+              </div>
           </template>
         </div>
       </template>
@@ -47,7 +47,7 @@ The first range date may be before, after, or equal to the second range date, de
 <script>
   Polymer({
 
-    is: 'px-datetime-calendar',
+    is: 'apm-calendar',
 
     properties: {
 

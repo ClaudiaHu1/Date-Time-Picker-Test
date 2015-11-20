@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="px-datetime-calendar.html"/>
+<link rel="import" href="apm-calendar.html"/>
 
 <script src="../moment/moment.js"></script>
 
@@ -8,11 +8,11 @@ Date Time picker element which allows user to select date.
 
 ##### Usage
 
-    <px-date-picker selected-date-picker="{{...}}">
-    </px-date-picker>
+    <apm-date-picker selected-date-picker="{{...}}">
+    </apm-date-picker>
 
 -->
-<dom-module id="px-date-picker">
+<dom-module id="apm-date-picker">
   <link rel="import" type="css" href="css/px-date-rangepicker.css"/>
   <template>
     <div id=box class="flex flex--top flex--center flex--wrap">
@@ -20,12 +20,12 @@ Date Time picker element which allows user to select date.
         <button on-click="_jumpBack" class="btn btn--bare u--mr-">
           <i class="fa fa-angle-left"></i>
         </button>
-        <px-datetime-calendar
+        <apm-calendar
           id="leftCalendar"
           display-month-year="{{pickerDisplayMonthYear}}"
           selected-date="{{selectedDate}}"
           allow-future-dates="{{allowFutureDates}}">
-        </px-datetime-calendar>
+        </apm-calendar>
         <button id=btnNextMonth on-click="_jumpForward" class="btn btn--bare u--ml-">
           <i class="fa fa-angle-right"></i>
         </button>
@@ -37,7 +37,7 @@ Date Time picker element which allows user to select date.
 <script>
   Polymer({
 
-    is: 'px-date-picker',
+    is: 'apm-date-picker',
 
     properties: {
 

@@ -4,12 +4,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>px-date-time-picker Demo</title>
+  <title>apm date time picker Demo</title>
   <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
   <script src="../webcomponentsjs/webcomponents-lite.js"></script>
   <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
   <link rel="import" href="../px-theme/px-theme.html"/>
-  <link rel="import" href="px-date-time-picker.html"/>
+  <link rel="import" href="apm-date-time-picker.html"/>
   <link rel="import" href="../iron-ajax/iron-ajax.html"/>
 
   <style>
@@ -22,30 +22,30 @@
 
 <body>
 
-<h3>Demo</h3>
+  <h3>Demo</h3>
 
-<!-- Wrap elements with auto-binding template to -->
-<!-- allow use of Polymer bindings in main document -->
-<template id="just-for-demo" is="dom-bind">
+  <!-- Wrap elements with auto-binding template to -->
+  <!-- allow use of Polymer bindings in main document -->
+  <template id="just-for-demo" is="dom-bind">
 
-  <iron-ajax
-    auto
-    url="demo-data/sample-data.json"
-    last-response="{{sampleData}}"
-    handle-as="json"></iron-ajax>
+    <iron-ajax
+      auto
+      url="demo-data/sample-data.json"
+      last-response="{{sampleData}}"
+      handle-as="json"></iron-ajax>
 
-  <div>
-    The Time selected <b>{{sampleData.selectedDateTime}}</b>
-  </div>
+    <div>
+      The Time selected <b>{{sampleData.selectedDateTime}}</b>
+    </div>
 
-  <div style="position: relative;">
-    <px-date-time-picker selected-date-Time="{{sampleData.selectedDateTime}}"
-                         allow-future-dates>
-    </px-date-time-picker>
-  </div>
+      <div style="position: relative;">
+        <apm-date-time-picker selected-date-Time="{{sampleData.selectedDateTime}}"
+                             allow-future-dates>
+        </apm-date-time-picker>
+      </div>
 
 
-</template>
+  </template>
 <script>
   window.addEventListener('WebComponentsReady', function() {
 

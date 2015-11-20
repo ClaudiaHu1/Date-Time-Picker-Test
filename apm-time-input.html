@@ -7,10 +7,10 @@ Time input which allows the user to type in hours, minutes, seconds in a control
 
 ##### Usage
 
-    <px-datetime-input time="{{...}}"></px-datetime-input>
+    <apm-time-input time="{{...}}"></px-time-input>
 
 -->
-<dom-module id="px-time-input">
+<dom-module id="apm-time-input">
   <link rel="import" type="css" href="css/px-time-input.css"/>
   <template>
     <div class="text-input time-input__field">
@@ -36,7 +36,7 @@ Time input which allows the user to type in hours, minutes, seconds in a control
 <script>
   Polymer({
 
-    is: 'px-datetime-input',
+    is: 'apm-time-input',
 
     properties : {
 
@@ -94,7 +94,7 @@ Time input which allows the user to type in hours, minutes, seconds in a control
     },
 
     _getContinuedInput: function(currentInput, newCharacter) {
-      return currentInput.substr(currentInput.length - 1) + newCharacter;
+       return currentInput.substr(currentInput.length - 1) + newCharacter;
     },
 
     _changeTimeIfValid: function(fieldChanged, newCharacter) {

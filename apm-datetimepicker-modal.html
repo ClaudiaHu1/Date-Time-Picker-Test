@@ -1,6 +1,6 @@
 <link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="px-time-picker.html"/>
-<link rel="import" href="px-date-picker.html"/>
+<link rel="import" href="apm-time-picker.html"/>
+<link rel="import" href="apm-date-picker.html"/>
 
 <script src="../moment/moment.js"></script>
 
@@ -9,27 +9,27 @@ DateTimepicker modal component.
 
 ##### Usage
 
-    <px-datetimepicker-modal selected={{...}}>
-    </px-datetimepicker-modal>
+    <apm-datetimepicker-modal selected={{...}}>
+    </apm-datetimepicker-modal>
 -->
-<dom-module id="px-datetimepicker-modal">
+<dom-module id="apm-datetimepicker-modal">
   <link rel="import" type="css" href="css/px-rangepicker.css"/>
   <template>
     <div class=overlay></div>
     <div id="rangepickerModal" class="rangepicker__box">
       <div class="flex flex--wrap">
         <div>
-          <px-date-picker
+          <apm-date-picker
             id="dateRangePicker"
             class="u-pt+"
             selected-date-picker="{{selected}}"
             allow-future-dates="{{allowFutureDates}}">
-          </px-date-picker>
-          <px-time-picker
+          </apm-date-picker>
+          <apm-time-picker
             class="border--top u-p+"
             id="timeRangePicker"
             selected-time="{{selected}}">
-          </px-time-picker>
+          </apm-time-picker>
         </div>
       </div>
       <div class="flex flex--right border--top u-p-">
@@ -46,7 +46,7 @@ DateTimepicker modal component.
 <script>
   Polymer({
 
-    is: 'px-datetimepicker-modal',
+    is: 'apm-datetimepicker-modal',
 
     properties: {
 

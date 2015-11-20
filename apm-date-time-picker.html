@@ -1,6 +1,6 @@
 <link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="px-date-time-fields.html"/>
-<link rel="import" href="px-datetimepicker-modal.html"/>
+<link rel="import" href="apm-dateTime-fields.html"/>
+<link rel="import" href="apm-datetimepicker-modal.html"/>
 
 <script src="../moment/moment.js"></script>
 
@@ -9,37 +9,37 @@ Rangepicker with time element.
 
 ##### Usage
 
-    <px-date-time-picker selectedDateTime="{{...}}">
-    </px-date-time-picker>
+    <apm-date-time-picker selectedDateTime="{{...}}">
+    </apm-date-time-picker>
 
 @demo demo.html
 -->
-<dom-module id="px-date-time-picker">
+<dom-module id="apm-date-time-picker">
   <link rel="import" type="css" href="css/px-rangepicker.css"/>
   <template>
-    <px-datetimepicker-modal
+    <apm-datetimepicker-modal
       id=rangePickerModal
       selected="{{fromMoment}}"
       allow-future-dates="{{allowFutureDates}}"
       display-options="{{displayOptions}}"
       hidden>
-    </px-datetimepicker-modal>
-    <px-date-time-fields
+    </apm-datetimepicker-modal>
+    <apm-datetime-fields
       id="rangeFields"
       from="{{fromMoment}}">
-    </px-date-time-fields>
+    </apm-datetime-fields>
   </template>
 </dom-module>
 
 <script>
   Polymer({
 
-    is: 'px-date-time-picker',
+    is: 'apm-date-time-picker',
 
     properties: {
 
       /**
-       * Selected in the date time picker - as ISO8601 strings
+       * Range selected in the date time picker - as ISO8601 strings
        *
        * Format
        * ```
@@ -86,6 +86,7 @@ Rangepicker with time element.
        *```
        * ```
        *
+       * @default no presets
        */
       displayOptions: {
         type: Object,

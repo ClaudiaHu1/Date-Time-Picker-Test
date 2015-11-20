@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="px-date-time-field.html"/>
+<link rel="import" href="apm-datetime-field.html"/>
 
 <script src="../moment/moment.js"></script>
 
@@ -8,27 +8,27 @@ Component with all the date/time fields which are displayed in the range picker.
 
 ##### Usage
 
-    <px-range-fields from={{...}}>
-    </px-range-fields>
+    <apm-range-fields from={{...}}>
+    </apm-range-fields>
 -->
-<dom-module id="px-range-fields">
+<dom-module id="apm-datetime-fields">
   <link rel="import" type="css" href="css/px-range-fields.css"/>
   <template>
     <div class="form flex flex--middle flex--wrap">
       <div id="fromFields" class="flex flex--middle text-input u-mb-">
         <span class=a11y>From</span>
-        <px-rdate-time-field
+        <apm-datetime-field
           id="fromDate"
           moment="{{fromWorkingCopy}}"
           date-or-time="Date"
           class="flex u-mr-">
-        </px-rdate-time-field>
-        <px-date-time-field
+        </apm-datetime-field>
+        <apm-datetime-field
           id="fromTime"
           moment="{{fromWorkingCopy}}"
           date-or-time="Time"
           class="flex">
-        </px-date-time-field>
+        </apm-datetime-field>
       </div>
     </div>
   </template>
@@ -37,7 +37,7 @@ Component with all the date/time fields which are displayed in the range picker.
 <script>
   Polymer({
 
-    is: 'px-date-time-fields',
+    is: 'apm-datetime-fields',
 
     properties: {
 
