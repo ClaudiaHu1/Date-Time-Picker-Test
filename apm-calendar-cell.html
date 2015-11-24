@@ -36,11 +36,11 @@ Element that renders a calendar cell for a given date (and for non-date cells in
       /**
        * Moment object with selected date
        */
-//      selectedDate: Object,
-      selectedDate: {
-        type: Object,
-        notify: true
-      },
+     selectedDate: Object,
+//      selectedDate: {
+//        type: Object,
+//        notify: true
+//      },
 
       /**
        * (optional)
@@ -60,7 +60,7 @@ Element that renders a calendar cell for a given date (and for non-date cells in
     },
 
     observers: [
-      '_updateDate(displayDate)'
+      '_updateDate(displayDate, selectedDate)'
     ],
 
     _updateDate: function() {
@@ -83,9 +83,9 @@ Element that renders a calendar cell for a given date (and for non-date cells in
           cellStyles += ' is-today';
         }
 
-        if (this._isSelectedDate()) {
-          cellStyles += ' is-selected';
-        }
+//        if (this._isSelectedDate()) {
+//          cellStyles += ' is-selected';
+//        }
 
       }
 
@@ -96,19 +96,19 @@ Element that renders a calendar cell for a given date (and for non-date cells in
     },
 
     _selectDate: function(e) {
-      var day = moment(this.displayDate);
-      this.selectedDate = day;
+//      var day = moment(this.displayDate);
+//      this.selectedDate = day;
       this.fire('px-date-selected', this.day);
     },
 
     _isTodaysDate: function() {
       var todaysDate = moment();
       return this.displayDate.isSame(todaysDate, 'day');
-    },
-
-    _isSelectedDate: function() {
-      return this.displayDate.isSame(this.selectedDate, 'day');
     }
+
+//    _isSelectedDate: function() {
+//      return this.displayDate.isSame(this.selectedDate, 'day');
+//    }
 
   });
 </script>

@@ -22,13 +22,13 @@ DateTimepicker modal component.
           <apm-date-picker
             id="dateRangePicker"
             class="u-pt+"
-            selected-date-picker="{{selected}}"
+            from-date="{{from}}"
             allow-future-dates="{{allowFutureDates}}">
           </apm-date-picker>
           <apm-time-picker
             class="border--top u-p+"
             id="timeRangePicker"
-            selected-time="{{selected}}">
+            selected-time="{{from}}">
           </apm-time-picker>
         </div>
       </div>
@@ -53,7 +53,7 @@ DateTimepicker modal component.
       /**
        * Moment object start date & time for range picker
        */
-      selected: {
+      from: {
         type: Object,
         notify: true
       },

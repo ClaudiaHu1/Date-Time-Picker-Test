@@ -112,6 +112,7 @@ The first range date may be before, after, or equal to the second range date, de
 
     _selectDate: function(day) {
       var newSelectedDate = moment(this.displayMonthYear.date(day));
+
       this.set('selectedDate', newSelectedDate);
       this.fire('date-selected');
     },

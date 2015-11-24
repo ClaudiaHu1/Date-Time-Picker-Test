@@ -22,7 +22,7 @@ Date Time picker element which allows user to select date.
         </button>
         <apm-calendar
           id="leftCalendar"
-          display-month-year="{{pickerDisplayMonthYear}}"
+          display-month-year="{{leftDisplayMonthYear}}"
           selected-date="{{selectedDate}}"
           allow-future-dates="{{allowFutureDates}}">
         </apm-calendar>
@@ -44,7 +44,7 @@ Date Time picker element which allows user to select date.
       /**
        * Moment object with selected date
        */
-      selectedDatePicker: {
+      fromDate: {
         type: Object,
         notify: true
       },
@@ -66,70 +66,78 @@ Date Time picker element which allows user to select date.
     },
 
     observers: [
-      '_updateSelectedRange(selectedDatePicker)'
+      '_updateSelectedRange(fromDate)'
     ],
 
     _updateSelectedRange: function() {
       // initialize the selected dates to the dates
-      this._resetVisibleCalendars();
+      //this._resetVisibleCalendars();
+      this.set('selectedDate', moment(this.fromDate));
     },
 
     _resetVisibleCalendars: function() {
       // initialize the displayed months to the selected selectedDatePicker
-      this.set('pickerDisplayMonthYear', moment(this.selectedDatePicker).startOf('month'));
+      // this.set('leftDisplayMonthYear', moment(this.fromDate).startOf('month'));
+      this.set('leftDisplayMonthYear', moment(this.fromDate).startOf('month').add(1, 'months'));
+
       this._setJumpButtonStyles();
     },
 
     ready: function() {
       var self = this;
       this.$.box.addEventListener('date-selected', function() {
-        var selectedDatePicker = self.selectedDate;
+        var fromDate = self.selectedDate;
 
         // set the times back to what they really should be
-        selectedDatePicker.hour(self.selectedDatePicker.hour());
-        selectedDatePicker.minute(self.selectedDatePicker.minute());
-        selectedDatePicker.second(self.selectedDatePicker.second());
+        fromDate.hour(self.fromDate.hour());
+        fromDate.minute(self.fromDate.minute());
+        fromDate.second(self.fromDate.second());
 
-        self.set('selectedDatePicker', selectedDatePicker);
+        self.set('fromDate', fromDate);
       });
 
     },
 
     _jumpBack: function() {
-      this.set('pickerDisplayMonthYear', moment(this.pickerDisplayMonthYear.add(-1, 'months')));
+      this.set('leftDisplayMonthYear', moment(this.leftDisplayMonthYear.add(-1, 'months')));
       this._setJumpButtonStyles();
     },
 
     _jumpForward: function() {
-      this.set('pickerDisplayMonthYear', moment(this.pickerDisplayMonthYear.add(1, 'months')));
+      this.set('leftDisplayMonthYear', moment(this.leftDisplayMonthYear.add(1, 'months')));
       this._setJumpButtonStyles();
     },
 
-//    _setJumpButtonStyles: function() {
-//      if (this.allowFutureDates) {
-//        this.toggleAttribute('disabled', false, this.$.btnNextMonth);
-//        this.toggleClass('btn--disabled', false, this.$.btnNextMonth);
-//      }
-//    }
+    _setJumpButtonStyles: function() {
+      if (this.allowFutureDates) {
+        this.toggleAttribute('disabled', false, this.$.btnNextMonth);
+        this.toggleClass('btn--disabled', false, this.$.btnNextMonth);
+      }
+    },
 
     _setJumpButtonStyles: function() {
       if (!this.allowFutureDates) {
         // if we don't allow future dates, we want to disable the jump right button
-        if (this._isCurrentMonth()) {
-          this.toggleAttribute('disabled', true, this.$.btnNextMonth);
-          this.toggleClass('btn--disabled', true, this.$.btnNextMonth);
-        }
-        else {
-          this.toggleAttribute('disabled', false, this.$.btnNextMonth);
-          this.toggleClass('btn--disabled', false, this.$.btnNextMonth);
-        }
-      }
-    },
+//        if (this._isCurrentMonth()) {
+//          this.toggleAttribute('disabled', true, this.$.btnNextMonth);
+//          this.toggleClass('btn--disabled', true, this.$.btnNextMonth);
+//        }
+//        else {
+//          this.toggleAttribute('disabled', false, this.$.btnNextMonth);
+//          this.toggleClass('btn--disabled', false, this.$.btnNextMonth);
+//        }
 
-    _isCurrentMonth: function() {
-      var now = moment();
-      return this.pickerDisplayMonthYear.isSame(now, 'month');
+        this.toggleAttribute('disabled', true, this.$.btnNextMonth);
+        this.toggleClass('btn--disabled', true, this.$.btnNextMonth);
+      }
+
+
     }
+
+//    _isCurrentMonth: function() {
+//      var now = moment();
+//      return this.leftDisplayMonthYear.isSame(now, 'month');
+//    }
 
   });
 </script>

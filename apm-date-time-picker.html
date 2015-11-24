@@ -19,7 +19,7 @@ Rangepicker with time element.
   <template>
     <apm-datetimepicker-modal
       id=rangePickerModal
-      selected="{{fromMoment}}"
+      from="{{fromMoment}}"
       allow-future-dates="{{allowFutureDates}}"
       display-options="{{displayOptions}}"
       hidden>
@@ -39,19 +39,19 @@ Rangepicker with time element.
     properties: {
 
       /**
-       * Range selected in the date time picker - as ISO8601 strings
+       * Selected in the date time picker - as ISO8601 strings
        *
        * Format
        * ```
        * {
-       *    "selectedDateTime": "2013-01-07T22:44:30.652Z"
+       *    "selectedTime": "2013-01-07T22:44:30.652Z"
        *
        * }
        * ```
        *
        * This is a 2-way data-bindable object which will be changed when the user Submits their new selected date.
        *
-       * @default the last week
+       * @default the current time
        */
       selectedDateTime: {
         type: Object,
@@ -61,6 +61,7 @@ Rangepicker with time element.
         value: function() {
           return {
             from: moment().subtract(7, 'day').toISOString()
+           // to: moment().toISOString()
           };
         }
       },
@@ -78,16 +79,8 @@ Rangepicker with time element.
         value: false
       },
 
-      /**
-       * (optional)
-       *
-       * Display configuration that allows optional display patterns
-       *
-       *```
-       * ```
-       *
-       * @default no presets
-       */
+      //presetRanges: Object,
+
       displayOptions: {
         type: Object,
         value: {
