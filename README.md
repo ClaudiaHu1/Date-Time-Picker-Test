@@ -22,13 +22,13 @@ Node, npm and bower are necessary to install the component and dependencies. web
 First, install the component via bower on the command line.
 
 ```
-bower install https://github.com/PredixDev/px-rangepicker.git --save
+bower install https://github.com/PredixDev/date-time-picker-test.git --save
 ```
 
 Second, import the component to your application with the following tag in your head.
 
 ```html
-<link rel="import" href="/bower_components/px-rangepicker/px-rangepicker.html" ></link>
+<link rel="import" href="/bower_components/date-time-picker-test/apm-date-picker.html.html" ></link>
 ```
 
 Finally, use the component in your application:
