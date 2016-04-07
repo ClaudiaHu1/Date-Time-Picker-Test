@@ -90,20 +90,8 @@ Display configuration that enables customization of the `displayType`, `submitBu
 <hr />
 
 ##Events
-### `range-changed`
-
-Event fired on change to `range` value. Listeners will receive an event object whose `e.detail.value` attribute has the changing property's new value. *Note: The value will be automatically updated if you are using 2-way data-binding, making event listeners unnecessary.*
-
-Add a listener using the `on-range-changed` annotated event listener syntax as follows:
-
-```html
-<apm-date-time-picker on-range-changed="rangeChangedHandler"></apm-date-time-picker>
-```
-```javascript
-var rangeChangedHandler = function(e) {
-	// do something on range-changed
-};
-```
+### `date-changed`
+ *Note: The value will be automatically updated if you are using 2-way data-binding, making event listeners unnecessary.*
 
 Attach an event listener using `addEventListener` like this:
 
