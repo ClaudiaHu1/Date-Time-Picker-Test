@@ -42,11 +42,11 @@ Finally, use the component in your application:
 
 ## Attributes
 
-#### range
+#### selected-date-Time
 
 *Type:* **Object** - (*Optional*) - *Default:* The previous week
 
-The `range` attribute is 2-way data-bindable object with two properties: "from" and "to". The value of these must be set to valid [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date-time strings.
+The `selected-date-Time` attribute is 2-way data-bindable object with one properties. The value of these must be set to valid [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date-time strings.
 
 ```html
 <apm-date-time-picker
