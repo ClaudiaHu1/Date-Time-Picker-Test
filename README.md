@@ -51,10 +51,8 @@ The `range` attribute is 2-way data-bindable object with two properties: "from" 
 ```html
 <apm-date-time-picker
 	...
-	range='{
-      "from": "2015-08-18T00:14:42.387Z",
-      "to": "2015-09-02T05:06:00.387Z"
-    }'>
+	selected-date-Time="{{sampleData.selectedDateTime}}"
+	>
 </apm-date-time-picker>
 ```
 
@@ -68,34 +66,6 @@ By default future dates are disabled in the date picker. Set the `allow-future-d
 <apm-date-time-picker
 	...
 	allow-future-dates="true">
-</apm-date-time-picker>
-```
-
-#### preset-ranges
-
-*Type:* **Array** - (*Optional*) - *Default:* Last Day, Last Week, Last Year
-
-The preset date/time ranges to be displayed defined as an array of one or more objects with three properties each: `displayText`, `startDateTime`, `endDateTime`.
-
-The `displayText` attribute assigns a label to the preset link which will appear in the modal.
-
-The `startDateTime` and `endDateTime` attributes set the beginning and end of the range, defined as [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date-time strings.
-
-```html
-<apm-date-time-picker
-	...
-	preset-ranges='[
-      {
-        "displayText": "Custom Time 1",
-        "startDateTime": "2014-05-01T01:00:00Z",
-        "endDateTime": "2015-08-12T01:00:00Z"
-      },
-      {
-        "displayText": "Custom Time 2",
-        "startDateTime": "2015-05-12T12:32:05Z",
-        "endDateTime": "2015-05-12T12:47:07Z"
-      }
-    ]'>
 </apm-date-time-picker>
 ```
 
@@ -138,12 +108,12 @@ var rangeChangedHandler = function(e) {
 Attach an event listener using `addEventListener` like this:
 
 ```html
-<apm-date-time-picker id="my-range-picker"></apm-date-time-picker>
+<apm-date-time-picker id="my-date-picker"></apm-date-time-picker>
 ```
 ```javascript
-	var el = document.querySelector("#my-range-picker");
-	el.addEventListener("range-changed", function(e) {
-		// do something on range-changed
+	var el = document.querySelector("#my-date-picker");
+	el.addEventListener("date-changed", function(e) {
+		// do something on date-changed
 	});
 ```
 
